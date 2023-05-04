@@ -1,9 +1,11 @@
 import {createBrowserRouter} from "react-router-dom";
 import Main from "../layouts/Main";
 import Home from "../pages/Home/Home/Home";
-
 import ChefLayout from "../layouts/ChefLayout";
 import Chef from "../pages/Chef/Chef/Chef";
+import Login from "../pages/Login/Login/Login";
+import Register from "../pages/Login/Register/Register";
+import LoginLayout from "../layouts/LoginLayout";
 
   const router = createBrowserRouter([
     {
@@ -15,6 +17,20 @@ import Chef from "../pages/Chef/Chef/Chef";
             element: <Home></Home>
         }
       ]
+    },
+    {
+        path: "/",
+        element: <LoginLayout></LoginLayout>,
+        children: [
+            {
+                path: "login",
+                element: <Login></Login>
+            },
+            {
+                path: "register",
+                element: <Register></Register>
+            }
+        ]
     },
     {
         path: "chef",

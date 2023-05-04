@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Chefvibes from '../../../assets/Chefvibes.png'
 import { Link } from "react-router-dom";
 import { FaUserCircle } from 'react-icons/fa';
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navigation = () => {
+  
+  const {user} = useContext(AuthContext);
+
   return (
     <Navbar className="my-0 py-0">
       <Container>
@@ -24,8 +28,13 @@ const Navigation = () => {
             <Link className="me-4 text-dark text-decoration-none">Blog</Link>
           </Nav>
           <Nav>
-            <Link className="me-4 text-dark"><FaUserCircle style={ {fontSize: '1.5rem'} } /></Link>
-           <Link className="me-4 text-dark text-decoration-none">Login</Link>
+            {
+              user && <Link className="me-4 text-decoration-none text-dark"><FaUserCircle style={ {fontSize: '1.5rem'} } /> &nbsp;{user.displayName}</Link>
+            }
+           {
+            user ? <Link className="me-4 text-dark text-decoration-none">LogOut</Link> :
+            <Link to="/login" className="me-4 text-dark text-decoration-none">Login</Link>
+           }
           </Nav>
         </Navbar.Collapse>
       </Container>
