@@ -1,34 +1,55 @@
-import React, { useContext } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../providers/AuthProvider';
+import React, { useContext } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+  const { signIn, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
-        signIn(email, password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser)
-            navigate(from, { replace: true })
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return (
-        <Container>
-        <h2 className="text-center">Login</h2>
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  return (
+    <Container>
+      <h2 className="text-center">Login</h2>
       <Row>
         <Col md={5} className="mx-auto">
           <Form onSubmit={handleLogin}>
@@ -37,7 +58,8 @@ const Login = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter Your Email"
-                name="email" required
+                name="email"
+                required
               />
             </Form.Group>
 
@@ -46,31 +68,51 @@ const Login = () => {
               <Form.Control
                 type="password"
                 placeholder="Enter Password"
-                name="password" required
+                name="password"
+                required
               />
             </Form.Group>
 
             <Form.Text>
-            Don't Have An Account? <Link to="/register" className="text-success font-weight-bold">Register Here.</Link>
-           </Form.Text>
+              Don't Have An Account?{" "}
+              <Link to="/register" className="text-success font-weight-bold">
+                Register Here.
+              </Link>
+            </Form.Text>
 
-           <div className="text-center mt-4">
-           <Button variant="warning" type="submit">
-              Login
-            </Button>
-           </div>
-    
-           <Form.Text className="text-success">
-            
-           </Form.Text>
-           <Form.Text className="text-danger">
+            <div className="text-center mt-4">
+              <Button variant="warning" type="submit">
+                Login
+              </Button>
+            </div>
 
-           </Form.Text>
+            <Form.Text className="text-success"></Form.Text>
+            <Form.Text className="text-danger"></Form.Text>
           </Form>
+          <div className="d-flex gap-3 justify-content-center">
+            <div className="text-center mt-4">
+              <Button
+                onClick={handleGoogleSignIn}
+                variant="outline-secondary"
+                type="submit"
+              >
+                <FaGoogle></FaGoogle> &nbsp; Login with Google
+              </Button>
+            </div>
+            <div className="text-center mt-4">
+              <Button
+                onClick={handleGithubSignIn}
+                variant="outline-secondary"
+                type="submit"
+              >
+                <FaGithub></FaGithub> &nbsp; Login with Github
+              </Button>
+            </div>
+          </div>
         </Col>
       </Row>
     </Container>
-    );
+  );
 };
 
 export default Login;
