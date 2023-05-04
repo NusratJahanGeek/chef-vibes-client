@@ -4,15 +4,16 @@ import Footer from '../pages/Shared/Footer/Footer';
 import Navigation from '../pages/Shared/Navigation/Navigation';
 import { Outlet } from 'react-router-dom';
 
-const Main = () => {
+const ChefLayout = () => {
     return (
         <div>
+            <div>
             <Navigation></Navigation>
-            <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
+        </div>
         </div>
     );
 };
 
-export default Main;
+export default ChefLayout;

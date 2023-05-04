@@ -18,7 +18,7 @@ const ChefSection = () => {
       <div className="row">
         {chefs.map((chef) => (
           <div className="col-md-4" key={chef.id}>
-            <Card className="my-3">
+            <Card className="my-3"  border="warning">
               <Card.Img variant="top" src={chef.image} height={290}/>
               <Card.Body>
                 <Card.Title>{chef.name}</Card.Title>
