@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Container, Nav, NavLink, Navbar } from "react-bootstrap";
 import Chefvibes from "../../../assets/Chefvibes.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { AuthContext } from "../../../providers/AuthProvider";
+import './Navigation.css'
 
 const Navigation = () => {
   const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
+  const [activeRoute, setActiveRoute] = useState(location.pathname);
 
   const handleLogOut = () => {
     logOut()
@@ -31,10 +34,12 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Link to="/" className="me-4 text-dark text-decoration-none">
+            <Link to="/" className={`nav-link me-4 text-decoration-none ${activeRoute === '/' ? 'active' : ''}`} onClick={() => setActiveRoute('/')}>
               Home
             </Link>
-            <Link className="me-4 text-dark text-decoration-none">Blog</Link>
+            <Link to="/blog" className={`nav-link me-4 text-decoration-none ${activeRoute === '/blog' ? 'active' : ''}`} onClick={() => setActiveRoute('/blog')}>
+              Blog
+            </Link>
           </Nav>
           <Nav>
             <div
@@ -44,31 +49,30 @@ const Navigation = () => {
               }}
             >
               {user ? (
-  <Link
-    className="me-4 text-decoration-none text-dark"
-    title={user.displayName ? user.displayName : ""}
-  >
-    <div style={{ display: "flex", alignItems: "center" }}>
-      {user.photoURL ? (
-        <div
-          style={{
-            backgroundImage: `url(${user.photoURL})`,
-            backgroundSize: "cover",
-            borderRadius: "50%",
-            width: "2rem",
-            height: "2rem",
-            marginRight: "0.5rem",
-          }}
-        ></div>
-      ) : (
-        <FaUserCircle
-          style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
-        />
-      )}
-    </div>
-  </Link>
-) : null}
-
+                <Link
+                  className="me-4 text-decoration-none text-dark"
+                  title={user.displayName ? user.displayName : ""}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    {user.photoURL ? (
+                      <div
+                        style={{
+                          backgroundImage: `url(${user.photoURL})`,
+                          backgroundSize: "cover",
+                          borderRadius: "50%",
+                          width: "2rem",
+                          height: "2rem",
+                          marginRight: "0.5rem",
+                        }}
+                      ></div>
+                    ) : (
+                      <FaUserCircle
+                        style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
+                      />
+                    )}
+                  </div>
+                </Link>
+              ) : null}
 
               <div>
                 {user ? (
