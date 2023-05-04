@@ -48,9 +48,9 @@ const RecipeSection = () => {
                       <Card className="mb-4 recipe-card">
                         <Card.Img variant="top" src={recipe.image} height={300} />
                         <Card.Body>
-                          <Card.Title><h4>{recipe.name}</h4></Card.Title>
+                          <Card.Title><h4 className='text-dark'>{recipe.name}</h4></Card.Title>
                           <Card.Text>
-                            <small>Rating: {recipe.rating}</small>
+                            <small className='text-dark'>Rating: {recipe.rating}</small>
                           </Card.Text>
                           <br />
                           <Link to={`/chef/${chefId.id}`}><Button variant="warning">View Recipes</Button></Link>
