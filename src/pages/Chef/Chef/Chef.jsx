@@ -2,6 +2,8 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useLoaderData, useParams } from "react-router-dom";
 import ChefRecipes from "../ChefRecipes/ChefRecipes";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Chef = () => {
   const { id } = useParams();
@@ -36,6 +38,7 @@ const Chef = () => {
         </Col>
       </Row>
       <h5 className="text-center mb-4 text-bold text-decoration-underline">List of Recipes by {individualChefs.name}</h5>
+      <ToastContainer></ToastContainer>
       <ChefRecipes></ChefRecipes>
     </Container>
   );
