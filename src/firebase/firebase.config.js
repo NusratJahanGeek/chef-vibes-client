@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDdZaQEsohTxQAaQowApS1Rc2cDTph3fmU",
-  authDomain: "chef-vibes.firebaseapp.com",
-  projectId: "chef-vibes",
-  storageBucket: "chef-vibes.appspot.com",
-  messagingSenderId: "45483934860",
-  appId: "1:45483934860:web:1c831d581d9b9c219e67a9"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 // Initialize Firebase
