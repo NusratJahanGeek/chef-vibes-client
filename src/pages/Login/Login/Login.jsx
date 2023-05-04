@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const Login = () => {
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password)
+        signIn(email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            navigate('/')
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     return (
         <Container>
         <h2 className="text-center">Login</h2>
       <Row>
         <Col md={5} className="mx-auto">
-          <Form>
+          <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -26,7 +47,7 @@ const Login = () => {
                 name="password" required
               />
             </Form.Group>
-            
+
             <Form.Text>
             Don't Have An Account? <Link to="/register" className="text-success font-weight-bold">Register Here.</Link>
            </Form.Text>
