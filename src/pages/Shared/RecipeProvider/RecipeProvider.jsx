@@ -7,12 +7,12 @@ const RecipeProvider = ({ children }) => {
   const [chefs, setChefs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/recipes")
+    fetch("https://chef-vibes-server-nusratjahangeek.vercel.app/recipes")
       .then((res) => res.json())
       .then((data) => setRecipes(data))
       .catch((error) => console.log(error));
       
-    fetch("http://localhost:5000/chefs")
+    fetch("https://chef-vibes-server-nusratjahangeek.vercel.app/chefs")
       .then((res) => res.json())
       .then((data) => setChefs(data))
       .catch((error) => console.log(error));

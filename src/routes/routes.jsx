@@ -42,7 +42,7 @@ import PrivateRoute from "./PrivateRoute";
                 element: <PrivateRoute>
                     <Chef></Chef>
                     </PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/chefs/${params.id}`)
+                loader: ({params}) => fetch(`https://chef-vibes-server-nusratjahangeek.vercel.app/chefs/${params.id}`)
             }
         ]
     }

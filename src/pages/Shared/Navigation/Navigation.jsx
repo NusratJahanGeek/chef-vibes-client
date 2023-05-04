@@ -44,33 +44,32 @@ const Navigation = () => {
               }}
             >
               {user ? (
-                <Link className="me-4 text-decoration-none text-dark">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    {user.photoURL ? (
-                      <div
-                        style={{
-                          backgroundImage: `url(${user.photoURL})`,
-                          backgroundSize: "cover",
-                          borderRadius: "50%",
-                          width: "2rem",
-                          height: "2rem",
-                          marginRight: "0.5rem",
-                        }}
-                      ></div>
-                    ) : (
-                      <FaUserCircle
-                        style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
-                      />
-                    )}
-                    {user.displayName ? user.displayName : ""}
-                  </div>
-                </Link>
-              ) : null}
+  <Link
+    className="me-4 text-decoration-none text-dark"
+    title={user.displayName ? user.displayName : ""}
+  >
+    <div style={{ display: "flex", alignItems: "center" }}>
+      {user.photoURL ? (
+        <div
+          style={{
+            backgroundImage: `url(${user.photoURL})`,
+            backgroundSize: "cover",
+            borderRadius: "50%",
+            width: "2rem",
+            height: "2rem",
+            marginRight: "0.5rem",
+          }}
+        ></div>
+      ) : (
+        <FaUserCircle
+          style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
+        />
+      )}
+    </div>
+  </Link>
+) : null}
+
+
               <div>
                 {user ? (
                   <Link>
