@@ -27,7 +27,6 @@ import Chef from "../pages/Chef/Chef/Chef";
             }
         ]
     }
-   
   ]);
 
   export default router;

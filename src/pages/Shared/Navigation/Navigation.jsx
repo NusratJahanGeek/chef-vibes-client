@@ -20,7 +20,7 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse  id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Link className="me-4 text-dark text-decoration-none">Home</Link>
+            <Link to="/" className="me-4 text-dark text-decoration-none">Home</Link>
             <Link className="me-4 text-dark text-decoration-none">Blog</Link>
           </Nav>
           <Nav>
