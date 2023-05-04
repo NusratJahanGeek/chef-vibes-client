@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -10,19 +10,26 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
   const handleLogin = (event) => {
     event.preventDefault();
+    setSuccess('');
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        setError('');
+        event.target.reset();
+        setSuccess('User has been logged in successfully.');
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
+        setSuccess('');
       });
   };
 
@@ -30,10 +37,11 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        setError('');
       })
       .catch((error) => {
-        console.log(error);
+         setError(error.message);
+         setSuccess('');
       });
   };
 
@@ -41,10 +49,11 @@ const Login = () => {
     signInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        setError('');
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
+        setSuccess('');
       });
   };
   return (
@@ -86,8 +95,14 @@ const Login = () => {
               </Button>
             </div>
 
-            <Form.Text className="text-success"></Form.Text>
-            <Form.Text className="text-danger"></Form.Text>
+           <div className="text-center mt-3">
+           <Form.Text className="text-success">
+            {success}
+           </Form.Text>
+            <Form.Text className="text-danger">
+            {error}
+            </Form.Text>
+           </div>
           </Form>
           <div className="d-flex gap-3 justify-content-center">
             <div className="text-center mt-4">
