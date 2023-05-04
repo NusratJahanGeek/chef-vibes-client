@@ -1,0 +1,11 @@
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    background: linear-gradient(to bottom, #ff914dc9, #ffc085be);
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 50px;
+    color: black;
+  }
+  
