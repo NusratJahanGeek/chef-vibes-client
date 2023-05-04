@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import LazyLoad from 'react-lazyload';
 
 const ChefSection = () => {
   const [chefs, setChefs] = useState([]);
@@ -19,7 +20,9 @@ const ChefSection = () => {
         {chefs.map((chef) => (
           <div className="col-md-4" key={chef.id}>
             <Card className="my-3"  border="warning">
+            <LazyLoad height={200} once>
               <Card.Img variant="top" src={chef.image} height={290}/>
+              </LazyLoad>
               <Card.Body>
                 <Card.Title>{chef.name}</Card.Title>
                 <Card.Text>
