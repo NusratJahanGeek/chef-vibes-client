@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 
-const ChefSection = () => {
+const ChefSection = ({ isDarkMode }) => {
   const [chefs, setChefs] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,8 @@ const ChefSection = () => {
       <div className="row">
         {chefs.map((chef) => (
           <div className="col-md-4" key={chef.id}>
-            <Card className="my-3" border="warning">
+            <Card className="my-3" border="warning" bg={isDarkMode ? "dark" : "light"}
+              text={isDarkMode ? "light" : "dark"}>
               <LazyLoad height={200} once>
                 <Card.Img variant="top" src={chef.image} height={290} />
               </LazyLoad>

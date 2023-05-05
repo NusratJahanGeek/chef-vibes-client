@@ -4,9 +4,13 @@ import Chefvibes from "../../../assets/Chefvibes.png";
 import { Link, useLocation } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { AuthContext } from "../../../providers/AuthProvider";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { ThemeContext } from "../../../providers/ThemeContextProvider";
+
 
 const Navigation = () => {
   const { user, logOut } = useContext(AuthContext);
+  const { toggleTheme, isDarkMode } = useContext(ThemeContext);
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
 
@@ -20,6 +24,8 @@ const Navigation = () => {
     <Navbar
       expand="lg"
       className="my-0 py-0 justify-content-between align-items-center"
+      bg={isDarkMode ? "dark" : "light"}
+      variant="dark"
       collapseOnSelect
     >
       <Container>
@@ -34,12 +40,13 @@ const Navigation = () => {
             />
           </Link>
         </Navbar.Brand>
+        <ThemeToggle toggleTheme={toggleTheme} />
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="pb-4">
           <Nav className="mx-auto">
             <Link
               to="/"
-              className={`nav-link me-4 text-decoration-none ${
+              className={`nav-link me-4 text-decoration-none text-secondary ${
                 activeRoute === "/" ? "active" : ""
               }`}
               onClick={() => setActiveRoute("/")}
@@ -48,7 +55,7 @@ const Navigation = () => {
             </Link>
             <Link
               to="/blog"
-              className={`nav-link me-4 text-decoration-none ${
+              className={`nav-link me-4 text-decoration-none text-secondary ${
                 activeRoute === "/blog" ? "active" : ""
               }`}
               onClick={() => setActiveRoute("/blog")}
@@ -59,7 +66,8 @@ const Navigation = () => {
           <Nav className="ml-auto">
             {user ? (
               <Link
-                className="me-4 text-decoration-none text-dark"
+                to="#"
+                className="me-4 text-decoration-none text-secondary"
                 title={user.displayName ? user.displayName : ""}
               >
                 <div
@@ -90,10 +98,10 @@ const Navigation = () => {
 
             <div>
               {user ? (
-                <Link>
+                <Link to="#">
                   <Button
                     onClick={handleLogOut}
-                    className="me-4 text-dark text-decoration-none bg-warning border-0"
+                    className="me-4 text-decoration-none bg-warning border-0"
                   >
                     LogOut
                   </Button>
@@ -101,7 +109,7 @@ const Navigation = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="me-4 text-dark text-decoration-none"
+                  className="me-4 text-secondary text-decoration-none"
                 >
                   Login
                 </Link>

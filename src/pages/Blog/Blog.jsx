@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Pdf from "react-to-pdf";
+import { ThemeContext } from "../../providers/ThemeContextProvider";
+import { useState } from "react";
 
 const ref = React.createRef();
 const options = {
@@ -8,9 +10,16 @@ const options = {
 };
 
 const Blog = () => {
+  const { theme } = useContext(ThemeContext);
+  const [content, setContent] = useState(null);
+
+  const handleContent = () => {
+    setContent(document.getElementById("blog-content").innerHTML);
+  };
+
   return (
-    <div>
-      <h6 className="ms-5">Want to Download this page as PDF?</h6>
+     <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
+      <h6 className="ms-5 mt-4">Want to Download this page as PDF?</h6>
       <Pdf
         targetRef={ref}
         filename="ChefVibes-Blog.pdf"
@@ -22,7 +31,10 @@ const Blog = () => {
         {({ toPdf }) => (
           <button
             className="bg-warning ms-5 border-warning mb-4"
-            onClick={toPdf}
+            onClick={() => {
+              handleContent();
+              setTimeout(toPdf, 200);
+            }}
           >
             Generate PDF
           </button>
