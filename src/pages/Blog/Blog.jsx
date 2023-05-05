@@ -1,8 +1,20 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
+const options = {
+  orientation: 'landscape',
+};
 
 const Blog = () => {
   return (
+    <div>
+        <Pdf targetRef={ref} filename="ChefVibes-Blog.pdf" options={options} x={.5} y={.5} scale={0.8}>
+        {({ toPdf }) => <button className="bg-warning ms-5" onClick={toPdf}>Generate PDF</button>}
+      </Pdf>
+      
+      <div ref={ref}>
     <Container className="mx-auto">
       <Row>
         <Col className="text-center mb-5">
@@ -12,7 +24,8 @@ const Blog = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={10} className="mb-5">
+     
+      <Col md={10} className="mb-5">
           <h4>
             Q: Tell us the differences between uncontrolled and controlled
             components.
@@ -115,8 +128,12 @@ const Blog = () => {
             making it easier to maintain and scale your application over time.
           </p>
         </Col>
+      
       </Row>
     </Container>
+    </div>
+    </div>
+   
   );
 };
 
