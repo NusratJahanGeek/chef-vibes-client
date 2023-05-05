@@ -88,7 +88,7 @@ const Login = () => {
       });
   };
   return (
-    <Container>
+    <Container className="mt-5">
       <h2 className="text-center">Login</h2>
       <Row>
         <Col md={5} className="mx-auto">

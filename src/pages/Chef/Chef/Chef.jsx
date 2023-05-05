@@ -11,7 +11,7 @@ const Chef = () => {
   const individualChefs = useLoaderData();
 
   return (
-    <Container>
+    <Container className="mt-5">
       <Row className="text-center mb-4">
         <Col>
           <h1>Chef Recipes</h1>
@@ -47,8 +47,8 @@ const Chef = () => {
       </Row>
       <Row>
         <Col>
-          <h5 className="text-center mb-4 text-bold text-decoration-underline">
-            List of Recipes by {individualChefs.name}
+          <h5 className="my-4 text-bold">
+            List of Recipes by {individualChefs.name}:
           </h5>
           <ToastContainer />
           <ChefRecipes />
