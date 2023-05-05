@@ -5,12 +5,10 @@ import { Link, useLocation } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { AuthContext } from "../../../providers/AuthProvider";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import { ThemeContext } from "../../../providers/ThemeContextProvider";
 
+const Navigation = ({ toggleTheme, isDarkMode }) => {
 
-const Navigation = () => {
   const { user, logOut } = useContext(AuthContext);
-  const { toggleTheme, isDarkMode } = useContext(ThemeContext);
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
 
@@ -21,6 +19,7 @@ const Navigation = () => {
   };
 
   return (
+    
     <Navbar
       expand="lg"
       className="my-0 py-0 justify-content-between align-items-center"
@@ -66,7 +65,6 @@ const Navigation = () => {
           <Nav className="ml-auto">
             {user ? (
               <Link
-                to="#"
                 className="me-4 text-decoration-none text-secondary"
                 title={user.displayName ? user.displayName : ""}
               >
@@ -98,7 +96,7 @@ const Navigation = () => {
 
             <div>
               {user ? (
-                <Link to="#">
+                <Link>
                   <Button
                     onClick={handleLogOut}
                     className="me-4 text-decoration-none bg-warning border-0"

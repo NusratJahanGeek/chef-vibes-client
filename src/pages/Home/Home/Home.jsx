@@ -8,13 +8,13 @@ import ThemeToggle from "../../Shared/ThemeToggle/ThemeToggle";
 
 const Home = ({ toggleTheme, isDarkMode }) => {
   return (
-    <div className={`home-container ${isDarkMode ? "dark" : "light"}`}>
-      <ChefSection isDarkMode={isDarkMode} />
+    <div>
+      <ChefSection></ChefSection>
       <div className="testimonial-container">
-        <TestimonialSection isDarkMode={isDarkMode} />
+        <TestimonialSection></TestimonialSection>
       </div>
       <RecipeProvider>
-        <RecipeSection isDarkMode={isDarkMode} />
+        <RecipeSection />
       </RecipeProvider>
     </div>
   );
