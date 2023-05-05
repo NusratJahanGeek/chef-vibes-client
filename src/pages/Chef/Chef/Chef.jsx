@@ -4,6 +4,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import ChefRecipes from "../ChefRecipes/ChefRecipes";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LazyLoad from "react-lazyload";
 
 const Chef = () => {
   const { id } = useParams();
@@ -23,12 +24,14 @@ const Chef = () => {
       <Row className="my-5">
         <Col md={1}></Col>
         <Col lg={5}>
+        <LazyLoad height={200} once>
           <img
             src={individualChefs.image} width={510}
             loading="lazy"
             srcSet={individualChefs.image}
             sizes="(max-width: 263px) 100vw, 263px"
           />
+          </LazyLoad>
         </Col>
         <Col lg={4}>
           <p>{individualChefs.bio}</p>

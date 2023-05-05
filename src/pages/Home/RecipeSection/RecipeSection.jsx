@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Tab, Nav, Button } from 'react-bootstrap';
 import { RecipeContext } from '../../Shared/RecipeProvider/RecipeProvider';
 import { Link } from 'react-router-dom';
 import './RecipeSection.css'
+import LazyLoad from 'react-lazyload';
 
 const RecipeSection = () => {
   const { recipes, chefs } = useContext(RecipeContext);
@@ -46,11 +47,13 @@ const RecipeSection = () => {
                   {group.recipes.map((recipe, index) => (
                     <Col md={4} key={index}>
                       <Card className="mb-4 recipe-card">
+                      <LazyLoad height={200} once>
                         <Card.Img variant="top" src={recipe.image} height={300} />
+                        </LazyLoad>
                         <Card.Body>
-                          <Card.Title><h4 className='text-dark'>{recipe.name}</h4></Card.Title>
+                          <Card.Title><h4>{recipe.name}</h4></Card.Title>
                           <Card.Text>
-                            <small className='text-dark'>Rating: {recipe.rating}</small>
+                            <small>Rating: {recipe.rating}</small>
                           </Card.Text>
                           <br />
                           <Link to={`/chef/${chefId.id}`}><Button variant="warning">View Recipes</Button></Link>

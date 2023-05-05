@@ -4,7 +4,7 @@ import Chefvibes from "../../../assets/Chefvibes.png";
 import { Link, useLocation } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { AuthContext } from "../../../providers/AuthProvider";
-import './Navigation.css'
+
 
 const Navigation = () => {
   const { user, logOut } = useContext(AuthContext);

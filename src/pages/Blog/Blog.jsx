@@ -10,6 +10,7 @@ const options = {
 const Blog = () => {
   return (
     <div>
+      <h6 className="ms-5">Want to Download this page as PDF?</h6>
         <Pdf targetRef={ref} filename="ChefVibes-Blog.pdf" options={options} x={.5} y={.5} scale={0.8}>
         {({ toPdf }) => <button className="bg-warning ms-5" onClick={toPdf}>Generate PDF</button>}
       </Pdf>
