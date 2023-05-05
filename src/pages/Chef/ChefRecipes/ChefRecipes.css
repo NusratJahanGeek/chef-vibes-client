@@ -1,0 +1,10 @@
+@media (max-width: 576px) {
+  .table-cell {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0.75rem;
+  }
+}

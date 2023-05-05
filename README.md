@@ -7,14 +7,14 @@ The purpose of the chef recipe site is to provide food-lovers with a centralized
 Homepage contains a list of Chef and Recipe listing where an overview of the food listed on the website is given. Here's what they contain:
 
 - Chef Detail
-  * Chef Name
-  * Experience
-  * Rating
-  * Likes
+  - Chef Name
+  - Experience
+  - Rating
+  - Likes
 - Recipe Detail
-  * Chef Name
-  * Rating
-  * Recipe Picture
+  - Chef Name
+  - Rating
+  - Recipe Picture
 
 ## Chef Recipe
 
@@ -24,7 +24,7 @@ It also contains the cooking method, ingredients, etc. to showcase how to prepar
 
 ## Register & Login Page
 
-These pages are there for authenticating the users right before they want to view the recipes. 
+These pages are there for authenticating the users right before they want to view the recipes.
 
 Information that a user needs to give are
 
@@ -32,6 +32,5 @@ Information that a user needs to give are
 - Email
 - Password
 - PhotoURL
-
 
 ## Live Website Link: https://chef-vibes.web.app/

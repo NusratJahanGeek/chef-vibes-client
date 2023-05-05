@@ -54,17 +54,21 @@ const Register = () => {
         });
     });
   };
-  
 
   return (
     <Container>
-        <h2 className="text-center">Register</h2>
+      <h2 className="text-center">Register</h2>
       <Row>
         <Col md={5} className="mx-auto">
           <Form onSubmit={handleRegister}>
             <Form.Group className="mb-3" controlId="formName">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter Your Name" name="name" required />
+              <Form.Control
+                type="text"
+                placeholder="Enter Your Name"
+                name="name"
+                required
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formEmail">
@@ -72,7 +76,8 @@ const Register = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter Your Email"
-                name="email" required
+                name="email"
+                required
               />
             </Form.Group>
 
@@ -81,7 +86,8 @@ const Register = () => {
               <Form.Control
                 type="password"
                 placeholder="Enter Password"
-                name="password" required
+                name="password"
+                required
               />
             </Form.Group>
 
@@ -90,28 +96,28 @@ const Register = () => {
               <Form.Control
                 type="text"
                 placeholder="Enter photo URL"
-                name="photoURL" required
+                name="photoURL"
+                required
               />
             </Form.Group>
 
             <Form.Text>
-            Already Have An Account? <Link to="/login" className="text-success font-weight-bold">Login Here.</Link>
-           </Form.Text>
+              Already Have An Account?{" "}
+              <Link to="/login" className="text-success font-weight-bold">
+                Login Here.
+              </Link>
+            </Form.Text>
 
-           <div className="text-center mt-4">
-           <Button variant="warning" type="submit">
-              Register
-            </Button>
-           </div>
-    
-           <div className="text-center mt-3">
-           <Form.Text className="text-success">
-           {success}
-           </Form.Text>
-           <Form.Text className="text-danger">
-           {error}
-           </Form.Text>
-           </div>
+            <div className="text-center mt-4">
+              <Button variant="warning" type="submit">
+                Register
+              </Button>
+            </div>
+
+            <div className="text-center mt-3">
+              <Form.Text className="text-success">{success}</Form.Text>
+              <Form.Text className="text-danger">{error}</Form.Text>
+            </div>
           </Form>
         </Col>
       </Row>

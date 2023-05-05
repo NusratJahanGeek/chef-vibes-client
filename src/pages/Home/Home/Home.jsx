@@ -3,12 +3,13 @@ import ChefSection from "../ChefSection/ChefSection";
 import TestimonialSection from "../TestimonialSection/TestimonialSection";
 import RecipeSection from "../RecipeSection/RecipeSection";
 import RecipeProvider from "../../Shared/RecipeProvider/RecipeProvider";
+import "./Home.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home-container">
       <ChefSection></ChefSection>
-      <div className="bg-dark p-5 my-5">
+      <div className="testimonial-container">
         <TestimonialSection></TestimonialSection>
       </div>
       <RecipeProvider>
