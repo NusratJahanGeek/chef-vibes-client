@@ -11,6 +11,7 @@ const Register = () => {
   const from = location.state?.from?.pathname || "/";
 
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
 
   const handleRegister = (event) => {
@@ -23,13 +24,37 @@ const Register = () => {
     const password = form.password.value;
     console.log(name, email, photoURL, password);
 
+    const fieldErrors = {};
+
+    if (!name) {
+      fieldErrors.name = "Name is required";
+    }
+
+    if (!email) {
+      fieldErrors.email = "Email is required";
+    }
+
+    if (!photoURL) {
+      fieldErrors.photoURL = "Photo URL is required";
+    }
+
+    if (!password) {
+      fieldErrors.password = "Password is required";
+    }
+
+    setErrors(fieldErrors);
+
+    if (Object.keys(fieldErrors).length > 0) {
+      return;
+    }
+
     // Wrap the createUser function in a promise
     return new Promise((resolve, reject) => {
       createUser(email, password)
         .then((result) => {
           const createdUser = result.user;
           console.log(createdUser);
-          setError("");
+          setError({});
           event.target.reset();
           setSuccess("User has been logged in successfully.");
           navigate(from, { replace: true });
@@ -48,7 +73,11 @@ const Register = () => {
             });
         })
         .catch((error) => {
-          setError(error.message);
+          if (error.message.includes("weak-password")) {
+            setError({ password: "Password is less than 6 characters" });
+          } else {
+            setError({ general: error.message });
+          }
           setSuccess("");
           reject(error); // Reject the promise
         });
@@ -67,8 +96,11 @@ const Register = () => {
                 type="text"
                 placeholder="Enter Your Name"
                 name="name"
-                required
+                isInvalid={!!errors.name}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formEmail">
@@ -77,8 +109,11 @@ const Register = () => {
                 type="email"
                 placeholder="Enter Your Email"
                 name="email"
-                required
+                isInvalid={!!errors.email}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPassword">
@@ -87,8 +122,11 @@ const Register = () => {
                 type="password"
                 placeholder="Enter Password"
                 name="password"
-                required
+                isInvalid={!!errors.password}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-4" controlId="formPhotoURL">
@@ -97,8 +135,11 @@ const Register = () => {
                 type="text"
                 placeholder="Enter photo URL"
                 name="photoURL"
-                required
+                isInvalid={!!errors.photoURL}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.photoURL}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Text>
@@ -117,6 +158,9 @@ const Register = () => {
             <div className="text-center mt-3">
               <Form.Text className="text-success">{success}</Form.Text>
               <Form.Text className="text-danger">{error}</Form.Text>
+              <Form.Text className="text-danger">
+                {Object.values(error).join(", ")}
+              </Form.Text>
             </div>
           </Form>
         </Col>

@@ -5,31 +5,58 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-  const { signIn, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
-    setSuccess('');
+    setSuccess("");
+
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    const fieldErrors = {};
+
+    if (!email) {
+      fieldErrors.email = "Email is required";
+    }
+
+    if (!password) {
+      fieldErrors.password = "Password is required";
+    }
+
+    setErrors(fieldErrors);
+
+    if (Object.keys(fieldErrors).length > 0) {
+      return;
+    }
+
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        setError('');
+        setError("");
         event.target.reset();
-        setSuccess('User has been logged in successfully.');
+        setSuccess("User has been logged in successfully.");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        setError(error.message);
-        setSuccess('');
+        if (error.message.includes("wrong-password")) {
+          setError("You've entered a wrong password.");
+        } else if (error.message.includes("user-not-found")) {
+          setError("We couldn't find your email address on our database. Please use the correct one.");
+        } else {
+          setError(error.message);
+        }
+
+        setSuccess("");
       });
   };
 
@@ -37,11 +64,13 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-        setError('');
+        setError("");
+        setSuccess("User has been logged in successfully.");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
-         setError(error.message);
-         setSuccess('');
+        setError(error.message);
+        setSuccess("");
       });
   };
 
@@ -49,11 +78,13 @@ const Login = () => {
     signInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
-        setError('');
+        setError("");
+        setSuccess("User has been logged in successfully.");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error.message);
-        setSuccess('');
+        setSuccess("");
       });
   };
   return (
@@ -68,8 +99,11 @@ const Login = () => {
                 type="email"
                 placeholder="Enter Your Email"
                 name="email"
-                required
+                isInvalid={!!errors.email}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPassword">
@@ -78,8 +112,11 @@ const Login = () => {
                 type="password"
                 placeholder="Enter Password"
                 name="password"
-                required
+                isInvalid={!!errors.password}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Text>
@@ -95,14 +132,10 @@ const Login = () => {
               </Button>
             </div>
 
-           <div className="text-center mt-3">
-           <Form.Text className="text-success">
-            {success}
-           </Form.Text>
-            <Form.Text className="text-danger">
-            {error}
-            </Form.Text>
-           </div>
+            <div className="text-center mt-3">
+              <Form.Text className="text-success">{success}</Form.Text>
+              <Form.Text className="text-danger">{error}</Form.Text>
+            </div>
           </Form>
           <div className="d-flex gap-3 justify-content-center">
             <div className="text-center mt-4">
