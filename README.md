@@ -1,4 +1,4 @@
-# ([Server Side Repository Link](https://github.com/NusratJahanGeek/chef-vibes-server-course-4/b7a10-chef-recipe-hunter-server-side-NusratJahanGeek))
+# ([Server Side Repository Link](https://github.com/NusratJahanGeek/chef-vibes-server))
 
 # ChefVibes
 
